@@ -131,18 +131,8 @@ gridButton.addEventListener('click', (event) => {
             square.style.border = '0.1px solid gray';
         });
     } else {
-        existGrid = 0;
-        event.target.style.border = '2px solid rgb(15, 66, 204)';
-        event.target.style.color = 'rgb(20, 51, 137)';
-        event.target.style.boxShadow = '0 0 0 black';
-        event.target.addEventListener('mouseover', (event2) => {
-            event2.target.style.border = '2px solid rgb(15, 66, 204)';
-            event2.target.style.color = 'rgb(20, 51, 137)';
-        });
-        event.target.addEventListener('mouseout', (event2) => {
-            event2.target.style.border = '2px solid black';
-            event2.target.style.color = 'black';
-        });
+        removeGridEffect();
+
         let squaresList = document.querySelectorAll('.square');
         squaresList = Array.from(squaresList);
         squaresList.forEach((square) => {
@@ -263,6 +253,27 @@ function removeEraserEffect(from) {
     });
     eraserButton.addEventListener('mouseout', (event2) => {
         if(existEraser === 0) {
+            event2.target.style.border = '2px solid black';
+            event2.target.style.color = 'black';
+        }
+    });
+}
+
+//----------------------- remove grid effect -----------------------
+
+function removeGridEffect() {
+    existGrid = 0;
+    gridButton.style.border = '2px solid rgb(15, 66, 204)';
+    gridButton.style.color = 'rgb(20, 51, 137)';
+    gridButton.style.boxShadow = '0 0 0 black';
+    gridButton.addEventListener('mouseover', (event2) => {
+        if(existGrid === 0) {
+            event2.target.style.border = '2px solid rgb(15, 66, 204)';
+            event2.target.style.color = 'rgb(20, 51, 137)';
+        }
+    });
+    gridButton.addEventListener('mouseout', (event2) => {
+        if(existGrid === 0) {
             event2.target.style.border = '2px solid black';
             event2.target.style.color = 'black';
         }
