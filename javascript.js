@@ -1,3 +1,4 @@
+///display the board size under the slider
 const slider = document.getElementById('myRange');
 const output = document.getElementById('value');
 
@@ -13,6 +14,41 @@ for(let i = 1; i <= newNumberOfSquares; i++) {
     let squareLength = 100 / newBoardSize;
     square.setAttribute('style', `width: ${squareLength}%; height: ${squareLength}%; border: none;`);
 }
+
+///grid button global
+const gridButton = document.getElementById('grid-button');
+let existGrid = 0;
+gridButton.addEventListener('click', (event) => {
+    if(!existGrid) {
+        existGrid = 1;
+        event.target.style.border = '2px solid rgb(15, 66, 204)';
+        event.target.style.color = 'rgb(20, 51, 137)';
+        event.target.style.boxShadow = '0px 0px 20px rgb(15, 66, 204)';
+        let squaresList = document.querySelectorAll('.square');
+        squaresList = Array.from(squaresList); 
+        squaresList.forEach((square) => {
+            square.style.border = '1px solid black';
+        });
+    } else {
+        existGrid = 0;
+        event.target.style.border = '2px solid rgb(15, 66, 204)';
+        event.target.style.color = 'rgb(20, 51, 137)';
+        event.target.style.boxShadow = '0 0 0 black';
+        event.target.addEventListener('mouseover', (event2) => {
+            event2.target.style.border = '2px solid rgb(15, 66, 204)';
+            event2.target.style.color = 'rgb(20, 51, 137)';
+        });
+        event.target.addEventListener('mouseout', (event2) => {
+            event2.target.style.border = '2px solid black';
+            event2.target.style.color = 'black';
+        });
+        let squaresList = document.querySelectorAll('.square');
+        squaresList = Array.from(squaresList);
+        squaresList.forEach((square) => {
+            square.style.border = 'none';
+        });
+    }
+});
 
 slider.oninput = function() {
     output.textContent = this.value + ' x ' + this.value;
@@ -44,20 +80,23 @@ slider.oninput = function() {
     }
 
     oldNumberOfSquares = newNumberOfSquares;
+
+    if(existGrid == 1) {
+        let squaresList = document.querySelectorAll('.square');
+        squaresList = Array.from(squaresList);
+        squaresList.forEach((square) => {
+            square.style.border = '1px solid black';
+        });
+    }
+    blackButtonFunction();
+    //gridButtonFunction();  
 }
 
 function blackButtonFunction() {
     let clicksNumber = 0;
     const blackButton = document.getElementById('black');
     blackButton.addEventListener('click', () => {
-        // let squaresList = document.querySelectorAll('.square');
-        // squaresList = Array.from(squaresList);
-        // squaresList.forEach((square) => {
-        //     square.addEventListener('dragstart', () => {
-        //         square.style.backgroundColor = 'black';
-        //     });
-        // });
-
+        clicksNumber++;//////////////aici
         const grid = document.querySelector('#grid');
         let isDrawing = false;
 
@@ -75,6 +114,40 @@ function blackButtonFunction() {
         grid.addEventListener('mouseup', function stopDraw() {
             isDrawing = false;
         });
+    });
+}
+
+function gridButtonFunction() {
+    const gridButton = document.getElementById('grid-button');
+    let existGrid = 0;
+    let squaresList = document.querySelectorAll('.square');
+    squaresList = Array.from(squaresList);
+    gridButton.addEventListener('click', (event) => {
+        if(!existGrid) {
+            existGrid = 1;
+            event.target.style.border = '2px solid rgb(15, 66, 204)';
+            event.target.style.color = 'rgb(20, 51, 137)';
+            event.target.style.boxShadow = '0px 0px 20px rgb(15, 66, 204)';
+            squaresList.forEach((square) => {
+                square.style.border = '1px solid black';
+            });
+        } else {
+            existGrid = 0;
+            event.target.style.border = '2px solid rgb(15, 66, 204)';
+            event.target.style.color = 'rgb(20, 51, 137)';
+            event.target.style.boxShadow = '0 0 0 black';
+            event.target.addEventListener('mouseover', (event2) => {
+                event2.target.style.border = '2px solid rgb(15, 66, 204)';
+                event2.target.style.color = 'rgb(20, 51, 137)';
+            });
+            event.target.addEventListener('mouseout', (event2) => {
+                event2.target.style.border = '2px solid black';
+                event2.target.style.color = 'black';
+            });
+            squaresList.forEach((square) => {
+                square.style.border = 'none';
+            });
+        }
     });
 }
 
