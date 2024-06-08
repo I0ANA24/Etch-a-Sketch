@@ -36,6 +36,7 @@ blackButton.addEventListener('click', (event) => {
         }
 
         grid.addEventListener('mousedown', function startDraw(event) {
+            event.preventDefault();
             isDrawing = true;
             draw(event);
         });
@@ -55,6 +56,7 @@ blackButton.addEventListener('click', (event) => {
         }
 
         grid.addEventListener('mousedown', function startDraw(event) {
+            event.preventDefault();
             isDrawing = false;
             draw(event);
         });
@@ -86,6 +88,7 @@ eraserButton.addEventListener('click', (event) => {
         }
 
         grid.addEventListener('mousedown', function startDraw(event) {
+            event.preventDefault();
             isDrawing = true;
             draw(event);
         });
@@ -106,6 +109,7 @@ eraserButton.addEventListener('click', (event) => {
         }
 
         grid.addEventListener('mousedown', function startDraw(event) {
+            event.preventDefault();
             isDrawing = false;
             draw(event);
         });
