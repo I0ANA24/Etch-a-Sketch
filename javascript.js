@@ -21,6 +21,7 @@ let existBlack = 0;
 blackButton.addEventListener('click', (event) => {
     if(!existBlack) {
         existBlack = 1;
+        removeColorEffect('black');
         removeEraserEffect('black');
         event.target.style.border = '2px solid rgb(15, 66, 204)';
         event.target.style.color = 'rgb(20, 51, 137)';
@@ -67,6 +68,61 @@ blackButton.addEventListener('click', (event) => {
     }
 });
 
+//----------------------- color button -----------------------
+const colorButton = document.getElementById('color');
+let existColor = 0;
+colorButton.addEventListener('click', (event) => {
+    if(!existColor) {
+        existColor = 1;
+        removeBlackEffect('color');
+        removeEraserEffect('color');
+        event.target.style.border = '2px solid rgb(15, 66, 204)';
+        event.target.style.color = 'rgb(20, 51, 137)';
+        event.target.style.boxShadow = '0px 0px 20px rgb(15, 66, 204)';
+        
+        const grid = document.querySelector('#grid');
+        const colorPicker = document.querySelector("#color-picker");
+        let isDrawing = false;
+
+        function draw(event) {
+            if(isDrawing === true && existColor) {
+                event.target.style.backgroundColor = colorPicker.value;
+            }
+        }
+
+        grid.addEventListener('mousedown', function startDraw(event) {
+            event.preventDefault();
+            isDrawing = true;
+            draw(event);
+        });
+        grid.addEventListener('mousemove', draw);
+        grid.addEventListener('mouseup', function stopDraw() {
+            isDrawing = false;
+        });
+    } else {
+        removeColorEffect('color');
+
+        const grid = document.querySelector('#grid');
+        let isDrawing = false;
+
+        function draw(event) {
+            if(isDrawing === true) {
+                event.target.style.backgroundColor = 'black';
+            }
+        }
+
+        grid.addEventListener('mousedown', function startDraw(event) {
+            event.preventDefault();
+            isDrawing = false;
+            draw(event);
+        });
+        grid.addEventListener('mousemove', draw);
+        grid.addEventListener('mouseup', function stopDraw() {
+            isDrawing = false;
+        });
+    }
+});
+
 //----------------------- eraser button -----------------------
 const eraserButton = document.getElementById('eraser');
 let existEraser = 0;
@@ -74,6 +130,7 @@ eraserButton.addEventListener('click', (event) => {
     if(!existEraser) {
         existEraser = 1;
         removeBlackEffect('eraser');
+        removeColorEffect('eraser');
         event.target.style.border = '2px solid rgb(15, 66, 204)';
         event.target.style.color = 'rgb(20, 51, 137)';
         event.target.style.boxShadow = '0px 0px 20px rgb(15, 66, 204)';
@@ -236,6 +293,33 @@ function removeBlackEffect(from) {
         });
     }
 }
+
+//----------------------- remove color effect -----------------------
+function removeColorEffect(from) {
+    existColor = 0;
+    if(from === 'color') {
+        colorButton.style.border = '2px solid rgb(15, 66, 204)';
+        colorButton.style.color = 'rgb(20, 51, 137)';
+        colorButton.style.boxShadow = '0 0 0 black';
+    } else {
+        colorButton.style.border = '2px solid black';
+        colorButton.style.color = 'black';
+        colorButton.style.boxShadow = '0 0 0 black';
+    }
+    colorButton.addEventListener('mouseover', (event2) => {
+        if(existColor === 0) {
+            event2.target.style.border = '2px solid rgb(15, 66, 204)';
+            event2.target.style.color = 'rgb(20, 51, 137)';
+        }
+    });
+    colorButton.addEventListener('mouseout', (event2) => {
+        if(existColor === 0) {
+            event2.target.style.border = '2px solid black';
+            event2.target.style.color = 'black';
+        }
+    });
+}
+
 
 //----------------------- remove eraser effect -----------------------
 function removeEraserEffect(from) {
