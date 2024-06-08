@@ -75,11 +75,19 @@ button:focus {
 }
 
 #color-picker {
-    background-color: transparent;
     border: none;
-    padding: 0px 1px;
-    height: 25px;
+    padding: 0;
+    height: 20px;
     width: 45px;
+    /* -webkit-appearance: none; */
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border: none;
 }
 
 .grid-focus:focus {

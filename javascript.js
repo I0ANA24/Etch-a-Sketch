@@ -70,9 +70,75 @@ blackButton.addEventListener('click', (event) => {
 
 //----------------------- color button -----------------------
 const colorButton = document.getElementById('color');
+const colorPicker = document.querySelector('#color-picker');
 let existColor = 0;
+let existPicker = 0;
+
+colorPicker.addEventListener('click', () => {
+        existPicker = 1;
+        removeBlackEffect('color');
+        removeEraserEffect('color');
+        colorButton.style.border = '2px solid rgb(15, 66, 204)';
+        colorButton.style.color = 'rgb(20, 51, 137)';
+        colorButton.style.boxShadow = '0px 0px 20px rgb(15, 66, 204)';
+        colorPicker.style.border = '0px solid rgb(15, 66, 204)';
+        colorPicker.style.color = 'rgb(0, 0, 0)';
+        colorPicker.style.boxShadow = '0px 0px 0px rgb(15, 66, 204)';
+        
+        const grid = document.querySelector('#grid');
+        let isDrawing = false;
+
+        function draw(event) {
+            if(isDrawing === true && existColor) {
+                event.target.style.backgroundColor = colorPicker.value;
+            }
+        }
+
+        grid.addEventListener('mousedown', function startDraw(event) {
+            event.preventDefault();
+            isDrawing = true;
+            draw(event);
+        });
+        grid.addEventListener('mousemove', draw);
+        grid.addEventListener('mouseup', function stopDraw() {
+            isDrawing = false;
+        });
+});
+
 colorButton.addEventListener('click', (event) => {
-    if(!existColor) {
+    if(existPicker) {
+        existColor = 1;
+        removeBlackEffect('color');
+        removeEraserEffect('color');
+        event.target.style.border = '2px solid rgb(15, 66, 204)';
+        event.target.style.color = 'rgb(20, 51, 137)';
+        event.target.style.boxShadow = '0px 0px 20px rgb(15, 66, 204)';
+        colorPicker.style.border = '0px solid rgb(15, 66, 204)';
+        colorPicker.style.color = 'rgb(0, 0, 0)';
+        colorPicker.style.boxShadow = '0px 0px 0px rgb(15, 66, 204)';
+        
+        const grid = document.querySelector('#grid');
+        let isDrawing = false;
+
+        function draw(event) {
+            if(isDrawing === true && existColor) {
+                event.target.style.backgroundColor = colorPicker.value;
+            }
+        }
+
+        grid.addEventListener('mousedown', function startDraw(event) {
+            event.preventDefault();
+            isDrawing = true;
+            draw(event);
+        });
+        grid.addEventListener('mousemove', draw);
+        grid.addEventListener('mouseup', function stopDraw() {
+            isDrawing = false;
+        });
+        
+        existPicker = 0;
+    }
+    else if(!existColor) {
         existColor = 1;
         removeBlackEffect('color');
         removeEraserEffect('color');
@@ -81,7 +147,6 @@ colorButton.addEventListener('click', (event) => {
         event.target.style.boxShadow = '0px 0px 20px rgb(15, 66, 204)';
         
         const grid = document.querySelector('#grid');
-        const colorPicker = document.querySelector("#color-picker");
         let isDrawing = false;
 
         function draw(event) {
