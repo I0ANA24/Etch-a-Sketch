@@ -127,6 +127,62 @@ rainbowButton.addEventListener('click', (event) => {
     }
 });
 
+//----------------------- gray scale button -----------------------
+const grayScaleButton = document.getElementById('gray-scale');
+let existGrayScale = 0;
+grayScaleButton.addEventListener('click', (event) => {
+    if(!existGrayScale) {
+        existGrayScale = 1;
+        removeBlackEffect('gray-scale');
+        removeRainbowEffect('gray-scale');
+        removeColorEffect('gray-scale');
+        removeEraserEffect('gray-scale');
+        event.target.style.border = '2px solid rgb(15, 66, 204)';
+        event.target.style.color = 'rgb(20, 51, 137)';
+        event.target.style.boxShadow = '0px 0px 20px rgb(15, 66, 204)';
+
+        const grid = document.querySelector('#grid');
+        let isDrawing = false;
+
+        function draw(event) {
+            if(isDrawing === true && existGrayScale) {
+                event.target.style.backgroundColor = 'black';
+                event.target.style.opacity = parseFloat(event.target.style.opacity || 0) + 0.10;
+            }
+        }
+
+        grid.addEventListener('mousedown', function startDraw(event) {
+            event.preventDefault();
+            isDrawing = true;
+            draw(event);
+        });
+        grid.addEventListener('mouseover', draw);
+        grid.addEventListener('mouseup', function stopDraw() {
+            isDrawing = false;
+        });
+    } else {
+        removeGrayScaleEffect('gray-scale');
+        const grid = document.querySelector('#grid');
+        let isDrawing = false;
+
+        function draw(event) {
+            if(isDrawing === true) {
+                event.target.style.backgroundColor = 'black';
+            }
+        }
+
+        grid.addEventListener('mousedown', function startDraw(event) {
+            event.preventDefault();
+            isDrawing = false;
+            draw(event);
+        });
+        grid.addEventListener('mousemove', draw);
+        grid.addEventListener('mouseup', function stopDraw() {
+            isDrawing = false;
+        });
+    }
+});
+
 //----------------------- color button -----------------------
 const colorButton = document.getElementById('color');
 const colorPicker = document.querySelector('#color-picker');
@@ -440,6 +496,32 @@ function removeRainbowEffect(from) {
     });
     rainbowButton.addEventListener('mouseout', (event2) => {
         if(existRainbow === 0) {
+            event2.target.style.border = '2px solid black';
+            event2.target.style.color = 'black';
+        }
+    });
+}
+
+//----------------------- remove gray scale effect -----------------------
+function removeGrayScaleEffect(from) {
+    existGrayScale = 0;
+    if(from === 'gray-scale') {
+        grayScaleButton.style.border = '2px solid rgb(15, 66, 204)';
+        grayScaleButton.style.color = 'rgb(20, 51, 137)';
+        grayScaleButton.style.boxShadow = '0 0 0 black';
+    } else {
+        grayScaleButton.style.border = '2px solid black';
+        grayScaleButton.style.color = 'black';
+        grayScaleButton.style.boxShadow = '0 0 0 black';
+    }
+    grayScaleButton.addEventListener('mouseover', (event2) => {
+        if(existGrayScale === 0) {
+            event2.target.style.border = '2px solid rgb(15, 66, 204)';
+            event2.target.style.color = 'rgb(20, 51, 137)';
+        }
+    });
+    grayScaleButton.addEventListener('mouseout', (event2) => {
+        if(existGrayScale === 0) {
             event2.target.style.border = '2px solid black';
             event2.target.style.color = 'black';
         }

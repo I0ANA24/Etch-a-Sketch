@@ -139,6 +139,7 @@ input[type="color"]::-webkit-color-swatch {
     height: 600px;
     width: 600px;
     flex-wrap: wrap;
+    background-color: white;
 }
 
 .square {
