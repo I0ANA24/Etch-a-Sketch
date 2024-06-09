@@ -22,6 +22,7 @@ blackButton.addEventListener('click', (event) => {
     if(!existBlack) {
         existBlack = 1;
         removeRainbowEffect('black');
+        removeGrayScaleEffect('black');
         removeColorEffect('black');
         removeEraserEffect('black');
         event.target.style.border = '2px solid rgb(15, 66, 204)';
@@ -76,6 +77,7 @@ rainbowButton.addEventListener('click', (event) => {
     if(!existRainbow) {
         existRainbow = 1;
         removeBlackEffect('rainbow');
+        removeGrayScaleEffect('rainbow');
         removeColorEffect('black');
         removeEraserEffect('black');
         event.target.style.border = '2px solid rgb(15, 66, 204)';
@@ -193,6 +195,7 @@ colorPicker.addEventListener('click', () => {
         existPicker = 1;
         removeBlackEffect('color');
         removeRainbowEffect('color');
+        removeGrayScaleEffect('color');
         removeEraserEffect('color');
         colorButton.style.border = '2px solid rgb(15, 66, 204)';
         colorButton.style.color = 'rgb(20, 51, 137)';
@@ -226,6 +229,7 @@ colorButton.addEventListener('click', (event) => {
         existColor = 1;
         removeBlackEffect('color');
         removeRainbowEffect('color');
+        removeGrayScaleEffect('color');
         removeEraserEffect('color');
         event.target.style.border = '2px solid rgb(15, 66, 204)';
         event.target.style.color = 'rgb(20, 51, 137)';
@@ -259,6 +263,7 @@ colorButton.addEventListener('click', (event) => {
         existColor = 1;
         removeBlackEffect('color');
         removeRainbowEffect('color');
+        removeGrayScaleEffect('color');
         removeEraserEffect('color');
         event.target.style.border = '2px solid rgb(15, 66, 204)';
         event.target.style.color = 'rgb(20, 51, 137)';
@@ -314,6 +319,7 @@ eraserButton.addEventListener('click', (event) => {
         existEraser = 1;
         removeBlackEffect('eraser');
         removeRainbowEffect('eraser');
+        removeGrayScaleEffect('eraser');
         removeColorEffect('eraser');
         event.target.style.border = '2px solid rgb(15, 66, 204)';
         event.target.style.color = 'rgb(20, 51, 137)';
