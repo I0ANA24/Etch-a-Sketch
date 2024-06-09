@@ -34,7 +34,7 @@ blackButton.addEventListener('click', (event) => {
 
         function draw(event) {
             if(isDrawing === true && existBlack) {
-                event.target.style.backgroundColor = 'black';
+                event.target.style.ba = 'black';
             }
         }
 
@@ -331,6 +331,7 @@ eraserButton.addEventListener('click', (event) => {
         function draw(event) {
             if(isDrawing === true && existEraser) {
                 event.target.style.backgroundColor = 'white';
+                event.target.style.opacity = 1;
             }
         }
 
@@ -399,6 +400,7 @@ clearButton.addEventListener('click', (event) => {
     squaresList = Array.from(squaresList);
     squaresList.forEach((square) => {
         square.style.backgroundColor = 'white';
+        square.style.opacity = 1;
     });
     event.target.addEventListener('mouseover', (event2) => {
         event2.target.style.border = '2px solid rgb(15, 66, 204)';
