@@ -34,7 +34,7 @@ blackButton.addEventListener('click', (event) => {
 
         function draw(event) {
             if(isDrawing === true && existBlack) {
-                event.target.style.ba = 'black';
+                event.target.style.backgroundColor = 'black';
             }
         }
 
