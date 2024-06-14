@@ -35,6 +35,7 @@ blackButton.addEventListener('click', (event) => {
         function draw(event) {
             if(isDrawing === true && existBlack) {
                 event.target.style.backgroundColor = 'black';
+                event.target.style.opacity = "1";
             }
         }
 
@@ -94,6 +95,7 @@ rainbowButton.addEventListener('click', (event) => {
                 let B = Math.floor(Math.random() * 256);
                 let randomColor = 'rgb(' + R + ', ' + G + ', ' + B + ')';
                 event.target.style.backgroundColor = randomColor;
+                event.target.style.opacity = "1";
             }
         }
 
@@ -149,6 +151,10 @@ grayScaleButton.addEventListener('click', (event) => {
         function draw(event) {
             if(isDrawing === true && existGrayScale) {
                 event.target.style.backgroundColor = 'black';
+                console.log(event.target.style.opacity);
+                console.log(typeof event.target.style.opacity);
+                if(event.target.style.opacity === "1" || event.target.style.opacity === 1)
+                    event.target.style.opacity = 0;
                 event.target.style.opacity = parseFloat(event.target.style.opacity || 0) + 0.10;
             }
         }
@@ -210,6 +216,7 @@ colorPicker.addEventListener('click', () => {
         function draw(event) {
             if(isDrawing === true && existColor) {
                 event.target.style.backgroundColor = colorPicker.value;
+                event.target.style.opacity = "1";
             }
         }
 
@@ -244,6 +251,7 @@ colorButton.addEventListener('click', (event) => {
         function draw(event) {
             if(isDrawing === true && existColor) {
                 event.target.style.backgroundColor = colorPicker.value;
+                event.target.style.opacity = "1";
             }
         }
 
@@ -331,7 +339,7 @@ eraserButton.addEventListener('click', (event) => {
         function draw(event) {
             if(isDrawing === true && existEraser) {
                 event.target.style.backgroundColor = 'white';
-                event.target.style.opacity = 1;
+                event.target.style.opacity = "1";
             }
         }
 
@@ -400,7 +408,7 @@ clearButton.addEventListener('click', (event) => {
     squaresList = Array.from(squaresList);
     squaresList.forEach((square) => {
         square.style.backgroundColor = 'white';
-        square.style.opacity = 1;
+        square.style.opacity = "1";
     });
     event.target.addEventListener('mouseover', (event2) => {
         event2.target.style.border = '2px solid rgb(15, 66, 204)';
