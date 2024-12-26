@@ -11,7 +11,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    background-image: url(background.avif);
+    background-image: url("bg.avif");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
